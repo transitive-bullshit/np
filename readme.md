@@ -1,3 +1,8 @@
+> **Note**
+> This is a fork of [np](https://github.com/sindresorhus/np) which adds support for [pnpm](https://pnpm.io). The maintainers of np [understandably don't want to support every package manager](https://github.com/sindresorhus/np/issues/251#issuecomment-400717095), so that's why this fork exists.
+>
+> Aside from adding support for `pnpm`, this fork is equivalent to the upstream version.
+
 # np [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 > A better `npm publish`
@@ -59,6 +64,7 @@ $ np --help
     --preview               Show tasks without actually executing them
     --tag                   Publish under a given dist-tag
     --no-yarn               Don't use Yarn
+    --no-pnpm               Don't use pnpm
     --contents              Subdirectory to publish
     --no-release-draft      Skips opening a GitHub release draft
     --release-draft-only    Only opens a GitHub release draft
@@ -95,11 +101,12 @@ Currently, these are the flags you can configure:
 - `preview` - Show tasks without actually executing them (`false` by default).
 - `tag` - Publish under a given dist-tag (`latest` by default).
 - `yarn` - Use yarn if possible (`true` by default).
+- `pnpm` - Use pnpm if possible (`true` by default).
 - `contents` - Subdirectory to publish (`.` by default).
 - `releaseDraft` - Open a GitHub release draft after releasing (`true` by default).
 - `testScript` - Name of npm run script to run tests before publishing (`test` by default).
 - `2fa` - Enable 2FA on new packages (`true` by default) (setting this to `false` is not recommended).
-- `message` - The commit message used for the version bump. Any `%s` in the string will be replaced with the new version. By default, npm uses `%s` and Yarn uses `v%s`.
+- `message` - The commit message used for the version bump. Any `%s` in the string will be replaced with the new version. By default, npm and pnpm use `%s` and Yarn uses `v%s`.
 
 For example, this configures `np` to never use Yarn and to use `dist` as the subdirectory to publish:
 
@@ -167,7 +174,7 @@ You can also add `np` to a custom script in `package.json`. This can be useful i
 
 ### User-defined tests
 
-If you want to run a user-defined test script before publishing instead of the normal `npm test` or `yarn test`, you can use `--test-script` flag or the `testScript` config. This can be useful when your normal test script is running with a `--watch` flag or in case you want to run some specific tests (maybe on the packaged files) before publishing.
+If you want to run a user-defined test script before publishing instead of the normal `npm test`, `pnpm test`, or `yarn test`, you can use `--test-script` flag or the `testScript` config. This can be useful when your normal test script is running with a `--watch` flag or in case you want to run some specific tests (maybe on the packaged files) before publishing.
 
 For example, `np --test-script=publish-test` would run the `publish-test` script instead of the default `test`.
 
@@ -317,3 +324,4 @@ npm ERR! 403 Forbidden - GET https://registry.yarnpkg.com/-/package/my-awesome-p
 - [Sindre Sorhus](https://github.com/sindresorhus)
 - [Sam Verschueren](https://github.com/SamVerschueren)
 - [Itai Steinherz](https://github.com/itaisteinherz)
+- [Travis Fischer](https://github.com/transitive-bullshit) - added support for `pnpm`
